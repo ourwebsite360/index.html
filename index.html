@@ -1,145 +1,584 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Anti-Aging & Wellness Products</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Younger Today</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --cream: #fdf8f0;
+    --cream-dark: #f5ede0;
+    --charcoal: #2a2220;
+    --muted: #7a6e68;
+    --rose: #c8736a;
+  }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f5f5;
-            color: #333;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        header {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
 
-        h1 {
-            margin: 0;
-        }
+  /* â”€â”€ HEADER â”€â”€ */
+  header {
+    background: var(--charcoal);
+    padding: 14px 20px;
+    text-align: center;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
 
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 15px;
-        }
+  /* â”€â”€ HERO â”€â”€ */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+    background: var(--cream);
+  }
 
-        .product {
-            background: white;
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(201,169,110,0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 80%, rgba(200,115,106,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
 
-        .product img {
-            max-width: 100%;
-            border-radius: 10px;
-        }
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    animation: fadeUp 0.8s ease both;
+  }
 
-        .product h3 {
-            margin: 10px 0;
-        }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 10vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--charcoal);
+    max-width: 620px;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
 
-        .product p {
-            color: #555;
-        }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
 
-        .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 12px 20px;
-            background: #ff4d6d;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    text-align: center;
+    max-width: 340px;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.2s ease both;
+  }
 
-        .btn:hover {
-            background: #e33b5c;
-        }
-    </style>
+  .hero-image-wrap {
+    position: relative;
+    margin: 40px 0 36px;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px -12px -24px -24px;
+    border: 1px solid var(--gold-light);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .hero-image-wrap img {
+    width: 240px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 2px;
+    filter: sepia(8%);
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(201,169,110,0.35);
+  }
+
+  /* â”€â”€ CTA BUTTON â”€â”€ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--charcoal);
+    color: var(--gold-light);
+    text-decoration: none;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.3s, color 0.3s, transform 0.2s;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .btn:hover {
+    background: var(--gold);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .btn .arrow { font-size: 14px; transition: transform 0.2s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--charcoal);
+    color: var(--charcoal);
+  }
+
+  .btn-outline:hover {
+    background: var(--charcoal);
+    color: var(--gold-light);
+  }
+
+  /* â”€â”€ DIVIDER â”€â”€ */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 32px;
+    margin: 8px 0;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  .divider span { font-size: 18px; color: var(--gold); }
+
+  /* â”€â”€ SECTIONS â”€â”€ */
+  .section {
+    padding: 72px 24px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 7vw, 48px);
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 40px;
+  }
+
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  /* â”€â”€ BENEFITS â”€â”€ */
+  .benefits-section { background: var(--cream-dark); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .benefit {
+    background: white;
+    padding: 22px 18px;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(42,34,32,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .benefit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(42,34,32,0.1);
+  }
+
+  .benefit-icon { font-size: 26px; margin-bottom: 10px; }
+
+  .benefit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .benefit-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* â”€â”€ BEFORE/AFTER â”€â”€ */
+  .before-after {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    max-width: 400px;
+    margin: 0 auto 40px;
+  }
+
+  .ba-card {
+    flex: 1;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .ba-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ba-label {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(42,34,32,0.72);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+
+  /* â”€â”€ TESTIMONIALS â”€â”€ */
+  .testimonials-section { background: var(--charcoal); }
+
+  .testimonials-section .section-label { color: var(--gold); }
+  .testimonials-section .section-title { color: var(--cream); }
+
+  .testimonial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .testimonial {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 24px 20px;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .testimonial::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: var(--gold);
+    opacity: 0.4;
+    position: absolute;
+    top: 4px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-top: 20px;
+  }
+
+  .testimonial-author {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .stars { color: var(--gold); font-size: 13px; margin-bottom: 6px; }
+
+  /* â”€â”€ OFFER â”€â”€ */
+  .offer-section {
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .offer-box {
+    background: white;
+    border: 1px solid var(--gold-light);
+    border-radius: 6px;
+    padding: 40px 28px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 4px 40px rgba(201,169,110,0.12);
+  }
+
+  .offer-tag {
+    display: inline-block;
+    background: var(--rose);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .offer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+
+  .offer-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .guarantee {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* â”€â”€ FOOTER â”€â”€ */
+  footer {
+    background: var(--charcoal);
+    color: rgba(253,248,240,0.4);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* â”€â”€ ANIMATIONS â”€â”€ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>Premium Anti-Aging & Wellness Collection</h1>
-    <p>Look younger, feel better, and boost your confidence</p>
-</header>
+<!-- HEADER -->
+<header>âœ¦ Free shipping on orders over $50 &nbsp;Â·&nbsp; 30-Day Glow Guarantee âœ¦</header>
 
-<div class="container">
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Age-Defying Skincare</p>
+  <h1>Look <em>5 Years</em><br>Younger in Weeks</h1>
+  <p class="hero-sub">A single daily ritual that visibly smooths, firms, and illuminates your skin.</p>
 
-    <!-- Idrotherapy -->
-    <div class="product">
-        <h3>Idrotherapy Wrinkle Reducer</h3>
-        <img src="https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg">
-        <p>Reduce wrinkles and fine lines around your eyes quickly.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://e-idrotherapylove.com/#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+  <div class="hero-image-wrap">
+    <!-- REPLACE: swap src with your actual product image -->
+    <img src="https://via.placeholder.com/240x300/f5ede0/c9a96e?text=Product" alt="Glow Serum Product">
+    <div class="hero-badge">âœ¦ Best Seller</div>
+  </div>
+
+  <!-- REPLACE: swap href with your affiliate link -->
+  <a href="YOUR_AFFILIATE_LINK_HERE" class="btn">
+    Shop Now <span class="arrow">â†’</span>
+  </a>
+</section>
+
+<!-- BENEFITS -->
+<section class="section benefits-section">
+  <p class="section-label reveal">What It Does</p>
+  <h2 class="section-title reveal">Why People <em>Love It</em></h2>
+
+  <div class="benefits-grid">
+    <div class="benefit reveal">
+      <div class="benefit-icon">ðŸŒ¿</div>
+      <div class="benefit-title">Fades Wrinkles</div>
+      <div class="benefit-desc">Visibly reduces fine lines in as little as 2 weeks</div>
     </div>
-
-    <!-- SeriSkin -->
-    <div class="product">
-        <h3>SeriSkin Anti-Aging Formula</h3>
-        <img src="https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg">
-        <p>Powerful daily supplement for youthful and glowing skin.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://www.seriskin.com#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+    <div class="benefit reveal">
+      <div class="benefit-icon">âœ¨</div>
+      <div class="benefit-title">Radiant Glow</div>
+      <div class="benefit-desc">Instantly brightens dull and tired-looking skin</div>
     </div>
-
-    <!-- Derma Prime -->
-    <div class="product">
-        <h3>Derma Prime Plus</h3>
-        <img src="https://images.pexels.com/photos/3685530/pexels-photo-3685530.jpeg">
-        <p>Support clear, smooth, and radiant skin naturally.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://www.digistore24.com/redir/464719/eugenebaidoo658633/" target="_blank" class="btn">Get Yours Now</a>
+    <div class="benefit reveal">
+      <div class="benefit-icon">ðŸ’§</div>
+      <div class="benefit-title">Deep Hydration</div>
+      <div class="benefit-desc">72-hour moisture lock for plump, supple skin</div>
     </div>
-
-    <!-- ReFirmance -->
-    <div class="product">
-        <h3>ReFirmance Serum</h3>
-        <img src="https://images.pexels.com/photos/6621466/pexels-photo-6621466.jpeg">
-        <p>Boost skin firmness and reduce visible signs of aging.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://refirmance24.com/text.php#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+    <div class="benefit reveal">
+      <div class="benefit-icon">ðŸ•</div>
+      <div class="benefit-title">30-Sec Routine</div>
+      <div class="benefit-desc">One serum, one step â€” fits any busy lifestyle</div>
     </div>
+  </div>
+</section>
 
-    <!-- ReviTag -->
-    <div class="product">
-        <h3>ReviTag Collagen Support</h3>
-        <img src="https://images.pexels.com/photos/6621358/pexels-photo-6621358.jpeg">
-        <p>Enhance collagen production for youthful skin.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="http://therevitag24.com/text.php#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+<!-- BEFORE & AFTER -->
+<section class="section" style="background:var(--cream);">
+  <p class="section-label reveal">Results</p>
+  <h2 class="section-title reveal">Real <em>Transformation</em></h2>
+
+  <div class="before-after reveal">
+    <div class="ba-card">
+      <!-- REPLACE with your before image -->
+      <img src="https://via.placeholder.com/200x200/e0d5c8/7a6e68?text=Before" alt="Before">
+      <div class="ba-label">Before</div>
     </div>
-
-    <!-- RevaNail -->
-    <div class="product">
-        <h3>RevaNail</h3>
-        <img src="https://images.pexels.com/photos/3997983/pexels-photo-3997983.jpeg">
-        <p>Strengthen nails and improve overall nail health.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://getrevanail.com/read#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+    <div class="ba-card">
+      <!-- REPLACE with your after image -->
+      <img src="https://via.placeholder.com/200x200/f5ede0/c9a96e?text=After" alt="After">
+      <div class="ba-label">After</div>
     </div>
+  </div>
 
-    <!-- Pep Tonic -->
-    <div class="product">
-        <h3>Pep Tonic</h3>
-        <img src="https://images.pexels.com/photos/5938368/pexels-photo-5938368.jpeg">
-        <p>Boost energy, vitality, and overall wellness daily.</p>
-        <p style="color:red;">Limited Time Offer</p>
-        <a href="https://www.advancedbionutritionals.com/DS24/Pep-Tonic/First-Anti-Aging-Drink/HD.htm#aff=eugenebaidoo658633" target="_blank" class="btn">Get Yours Now</a>
+  <div style="text-align:center;">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:24px;font-weight:300;">Results shown after 3 weeks of daily use.</p>
+    <!-- REPLACE: swap href with your affiliate link -->
+    <a href="YOUR_AFFILIATE_LINK_HERE" class="btn btn-outline reveal">See More Results â†’</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <p class="section-label reveal">Testimonials</p>
+  <h2 class="section-title reveal">Real <em>Stories</em></h2>
+
+  <div class="testimonial-grid">
+    <div class="testimonial reveal">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <p class="testimonial-text">My wrinkles faded within 2 weeks. I genuinely feel like myself again â€” only younger.</p>
+      <p class="testimonial-author">â€” Sarah M., Verified Buyer</p>
     </div>
+    <div class="testimonial reveal">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <p class="testimonial-text">Best skincare I've ever tried. My friends keep asking what I'm doing differently.</p>
+      <p class="testimonial-author">â€” Linda K., Verified Buyer</p>
+    </div>
+    <div class="testimonial reveal">
+      <div class="stars">â˜…â˜…â˜…â˜…â˜…</div>
+      <p class="testimonial-text">I was skeptical, but the glow is undeniable. I've already ordered my third bottle.</p>
+      <p class="testimonial-author">â€” Priya T., Verified Buyer</p>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- OFFER -->
+<section class="section offer-section">
+  <div class="offer-box reveal">
+    <div class="offer-tag">â³ Limited Offer</div>
+    <h2 class="offer-title">Claim Your Glow</h2>
+    <p class="offer-subtitle">This exclusive deal won't last. Join thousands of women who've already transformed their skin.</p>
 
+    <!-- REPLACE: swap href with your affiliate link -->
+    <a href="YOUR_AFFILIATE_LINK_HERE" class="btn" style="animation:none;">
+      Order Now <span class="arrow">â†’</span>
+    </a>
+
+    <div class="guarantee">ðŸ”’ &nbsp;30-Day Money-Back Guarantee
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Â© 2026 Glow Store. All rights reserved.</p>
+  <p style="margin-top:6px;">
+    <a href="#">Privacy Policy</a> &nbsp;Â·&nbsp;
+    <a href="#">Terms of Use</a> &nbsp;Â·&nbsp;
+    <a href="#">Disclaimer</a>
+  </p>
+  <p style="margin-top:10px;font-size:10px;opacity:0.6;">
+    Results may vary. These statements have not been evaluated by the FDA.<br>
+    This product is not intended to diagnose, treat, cure, or prevent any disease.<br>
+    This page may contain affiliate links.
+  </p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
-</html>.​​​​
+</html>
