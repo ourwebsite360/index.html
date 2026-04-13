@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background:#0b0b0f;
+    background:linear-gradient(135deg,#000,#0a0a0a,#111);
     color:#f5f5f5;
 }
 
@@ -19,14 +19,14 @@ header {
     padding:25px;
     font-size:24px;
     font-weight:bold;
-    color:#d4af37;
-    border-bottom:2px solid #d4af37;
+    color:#FFD700;
+    border-bottom:2px solid #FFD700;
 }
 
 .trust {
     text-align:center;
     margin:20px 0;
-    color:#d4af37;
+    color:#FFD700;
 }
 
 .trust p {
@@ -34,23 +34,9 @@ header {
     color:#ccc;
 }
 
-body::before {
-    content:"SHOP NOW • PREMIUM • LUXURY • DEALS •";
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) rotate(-25deg);
-    font-size:60px;
-    color:rgba(212,175,55,0.05);
-    font-style:italic;
-    z-index:0;
-}
-
 .container {
     width:90%;
     margin:auto;
-    position:relative;
-    z-index:2;
 }
 
 .row {
@@ -64,9 +50,16 @@ body::before {
     flex:1;
     min-width:280px;
     background:#121212;
-    border:1px solid #d4af37;
+    border:1px solid #FFD700;
     border-radius:12px;
     text-align:center;
+    box-shadow:0 0 15px rgba(255,215,0,0.2);
+    transition:0.3s;
+}
+
+.product:hover {
+    transform:translateY(-5px);
+    box-shadow:0 0 25px rgba(255,215,0,0.4);
 }
 
 .product img {
@@ -75,30 +68,22 @@ body::before {
     object-fit:cover;
 }
 
-.product h3 {
-    color:#d4af37;
-}
-
-.product p {
-    color:#ccc;
-}
-
 .shop-btn {
     display:inline-block;
     margin:15px;
-    padding:10px 20px;
-    background:linear-gradient(90deg,#d4af37,#f5d76e);
+    padding:12px 25px;
+    background:linear-gradient(90deg,#FFD700,#ffcc00);
     color:#000;
     text-decoration:none;
-    font-style:italic;
     font-weight:bold;
+    border-radius:30px;
 }
 
 footer {
     text-align:center;
     padding:20px;
     background:#000;
-    color:#d4af37;
+    color:#FFD700;
 }
 </style>
 </head>
@@ -114,56 +99,47 @@ footer {
 
 <div class="container">
 
-<!-- PRODUCTS (ALL ADDED) -->
-
-<!-- ROW 1 -->
-<div class="row">
-<div class="product"><img src="images/sneaker1.png"><h3>Air Performance Sneaker</h3><p>⭐ 4.8/5 Rating</p><a class="shop-btn" href="https://sovrn.co/1qqqkm6">SHOP NOW</a></div>
-<div class="product"><img src="images/sneaker2.png"><h3>Retro Street Sneaker</h3><p>⭐ 4.9/5 Rating</p><a class="shop-btn" href="https://sovrn.co/gjy4tmr">SHOP NOW</a></div>
-</div>
-
-<!-- AUTO GENERATED PRODUCTS -->
 <script>
 const products = [
-["https://sovrn.co/cr6cn2p","https://ae-pic-a1.aliexpress-media.com/kf/Sdde20e8a7bb947abb623e1d2e3c017efI.jpg"],
-["https://sovrn.co/1in6bm9","https://ae-pic-a1.aliexpress-media.com/kf/Sf17967bdd9bb41d1bd8e1a1275acb61dn.jpg"],
-["https://sovrn.co/12iupvo","https://ae-pic-a1.aliexpress-media.com/kf/S094d52d9361c460dac8f0cfb2b6a52edL.jpg"],
-["https://sovrn.co/165dyzx","https://ae-pic-a1.aliexpress-media.com/kf/Sea087f19f2194be6a15235e53bddc1a85.jpg"],
-["https://sovrn.co/yir29lx","https://ae-pic-a1.aliexpress-media.com/kf/S9aae1202fa054c608ec587ce300e2adcn.jpg"],
-["https://sovrn.co/13wvatv","https://ae-pic-a1.aliexpress-media.com/kf/S003c0b381826433e8d84a3a02ed6b08ax.jpg"],
-["https://sovrn.co/snl3rl3","https://ae-pic-a1.aliexpress-media.com/kf/Sda5fddde87a64211819afb19cd0ba601y.jpg"],
-["https://sovrn.co/lj7srgb","https://ae-pic-a1.aliexpress-media.com/kf/S2255b49717d4432aa4182b4e9db4829fE.jpg"],
-["https://sovrn.co/18ylfgz","https://ae-pic-a1.aliexpress-media.com/kf/S63719edddcf84291b925d318709fca28Z.jpg"],
-["https://sovrn.co/7okbw65","https://ae-pic-a1.aliexpress-media.com/kf/Sba6ef265a13042ada57eb49a232c6376G.jpg"],
-["https://sovrn.co/1n5pkch","https://ae-pic-a1.aliexpress-media.com/kf/Sc950a5448d2e4f23b30f0eb93f08220bl.jpg"],
-["https://sovrn.co/v91ogn7","https://ae-pic-a1.aliexpress-media.com/kf/Sde2f906d21a84003b7b2b8365f9c99320.jpg"],
-["https://sovrn.co/3s4cklr","https://ae-pic-a1.aliexpress-media.com/kf/Sdcba9ca4631f455aba2a6405e7f3da37w.jpg"],
-["https://sovrn.co/ewn44rm","https://ae-pic-a1.aliexpress-media.com/kf/Sbf385957eb4446e1a38c17e6466e4c7eO.jpg"],
-["https://sovrn.co/1klusvn","https://ae-pic-a1.aliexpress-media.com/kf/Sc4659d97ac1440cda99a376618098b7dF.jpg"],
-["https://sovrn.co/16inohb","https://ae-pic-a1.aliexpress-media.com/kf/S2d6619d821564ddeb1c30839097bb74fP.jpg"],
-["https://sovrn.co/18yxi5b","https://ae-pic-a1.aliexpress-media.com/kf/S90c6e56a52e14a018e890491621f7781p.jpg"],
-["https://sovrn.co/1lkyv1l","https://ae-pic-a1.aliexpress-media.com/kf/S91a478476e8f49419f15a617d4d2542cn.jpg"],
-["https://sovrn.co/rslungp","https://ae-pic-a1.aliexpress-media.com/kf/Sd4281a26a8dd4a63be49e62d02f5c114g.jpg"],
-["https://sovrn.co/edbdgv5","https://ae-pic-a1.aliexpress-media.com/kf/S519a9c1690f44017860bc37e048cd03eT.jpg"],
-["https://sovrn.co/yij53dw","https://ae-pic-a1.aliexpress-media.com/kf/Sa618b24a38004d7c87eaa631c76f7cc0j.jpg"],
-["https://sovrn.co/ufncj4a","https://ae-pic-a1.aliexpress-media.com/kf/S497fd582e0a04216b4471e1d31e58a34O.jpg"],
-["https://sovrn.co/1l4mimw","https://ae-pic-a1.aliexpress-media.com/kf/S887f6ef7fb3d41bebb9100c79ed842e0E.jpg"],
-["https://sovrn.co/jbdsrpq","https://ae-pic-a1.aliexpress-media.com/kf/Sa8671e9d48c740af88e63fb4bee79424L.jpg"],
-["https://sovrn.co/7z6ofuj","https://ae-pic-a1.aliexpress-media.com/kf/S8c06405089cf4cc98b360a6c54af8322Y.jpg"],
-["https://sovrn.co/vpe9u4x","https://ae-pic-a1.aliexpress-media.com/kf/Sa10a3112cc764aa5a238f9d33cffdc9a9.jpg"],
-["https://sovrn.co/82dmgch","https://ae-pic-a1.aliexpress-media.com/kf/S2332e2340e4441d6962eaa035f722978u.jpg"],
-["https://sovrn.co/pskk7j0","https://ae-pic-a1.aliexpress-media.com/kf/S88f314704444401aabe5e5181d594d10E.jpg"],
-["https://sovrn.co/1nrbg05","https://ae-pic-a1.aliexpress-media.com/kf/Sdd4807bfc32345f7a7a279f05429d18cW.jpg"],
-["https://sovrn.co/fn4nvo1","https://ae-pic-a1.aliexpress-media.com/kf/Seb8e1de5aaca4fc3bccc2a61dbd9c7afZ.jpg"],
-["https://sovrn.co/met7xtu","https://ae-pic-a1.aliexpress-media.com/kf/S73bd1b9002a04941807e029c8746093b8.jpg"],
-["https://sovrn.co/23dxhkm","https://ae-pic-a1.aliexpress-media.com/kf/Sa594b63a3a474a099dc6bb51135a6d419.jpg"],
-["https://sovrn.co/12xbi88","https://ae-pic-a1.aliexpress-media.com/kf/S9d874b813e6d47119eb8114a34e52d9aQ.jpg"],
-["https://sovrn.co/a955uni","https://ae-pic-a1.aliexpress-media.com/kf/S375ac6842e514b0fa7cdd74b90ce9a86j.jpg"],
-["https://sovrn.co/0tkcnrp","https://ae-pic-a1.aliexpress-media.com/kf/S882513a843ae497f8a0f93fb464558d0b.jpg"],
-["https://sovrn.co/1d6uncj","https://ae-pic-a1.aliexpress-media.com/kf/S3a81262d93a44302bda5ec7fd9ca2fa3C.jpg"],
-["https://sovrn.co/1gukx0v","https://ae-pic-a1.aliexpress-media.com/kf/S0dca4f85065b4641b45702880d1a32723.jpg"],
-["https://sovrn.co/13ayfpc","https://ae-pic-a1.aliexpress-media.com/kf/S2810954781a64c54a094928a5b673cbcc.jpg"],
-["https://sovrn.co/9js2vlj","https://ae-pic-a1.aliexpress-media.com/kf/S33c96386c9174e868bc3334f66386b55P.jpg"]
+["https://sovrn.co/cr6cn2p","ae-pic-a1.aliexpress-media.com/kf/Sdde20e8a7bb947abb623e1d2e3c017efI.jpg"],
+["https://sovrn.co/1in6bm9","ae-pic-a1.aliexpress-media.com/kf/Sf17967bdd9bb41d1bd8e1a1275acb61dn.jpg"],
+["https://sovrn.co/12iupvo","ae-pic-a1.aliexpress-media.com/kf/S094d52d9361c460dac8f0cfb2b6a52edL.jpg"],
+["https://sovrn.co/165dyzx","ae-pic-a1.aliexpress-media.com/kf/Sea087f19f2194be6a15235e53bddc1a85.jpg"],
+["https://sovrn.co/yir29lx","ae-pic-a1.aliexpress-media.com/kf/S9aae1202fa054c608ec587ce300e2adcn.jpg"],
+["https://sovrn.co/13wvatv","ae-pic-a1.aliexpress-media.com/kf/S003c0b381826433e8d84a3a02ed6b08ax.jpg"],
+["https://sovrn.co/snl3rl3","ae-pic-a1.aliexpress-media.com/kf/Sda5fddde87a64211819afb19cd0ba601y.jpg"],
+["https://sovrn.co/lj7srgb","ae-pic-a1.aliexpress-media.com/kf/S2255b49717d4432aa4182b4e9db4829fE.jpg"],
+["https://sovrn.co/18ylfgz","ae-pic-a1.aliexpress-media.com/kf/S63719edddcf84291b925d318709fca28Z.jpg"],
+["https://sovrn.co/7okbw65","ae-pic-a1.aliexpress-media.com/kf/Sba6ef265a13042ada57eb49a232c6376G.jpg"],
+["https://sovrn.co/1n5pkch","ae-pic-a1.aliexpress-media.com/kf/Sc950a5448d2e4f23b30f0eb93f08220bl.jpg"],
+["https://sovrn.co/v91ogn7","ae-pic-a1.aliexpress-media.com/kf/Sde2f906d21a84003b7b2b8365f9c99320.jpg"],
+["https://sovrn.co/3s4cklr","ae-pic-a1.aliexpress-media.com/kf/Sdcba9ca4631f455aba2a6405e7f3da37w.jpg"],
+["https://sovrn.co/ewn44rm","ae-pic-a1.aliexpress-media.com/kf/Sbf385957eb4446e1a38c17e6466e4c7eO.jpg"],
+["https://sovrn.co/1klusvn","ae-pic-a1.aliexpress-media.com/kf/Sc4659d97ac1440cda99a376618098b7dF.jpg"],
+["https://sovrn.co/16inohb","ae-pic-a1.aliexpress-media.com/kf/S2d6619d821564ddeb1c30839097bb74fP.jpg"],
+["https://sovrn.co/18yxi5b","ae-pic-a1.aliexpress-media.com/kf/S90c6e56a52e14a018e890491621f7781p.jpg"],
+["https://sovrn.co/1lkyv1l","ae-pic-a1.aliexpress-media.com/kf/S91a478476e8f49419f15a617d4d2542cn.jpg"],
+["https://sovrn.co/rslungp","ae-pic-a1.aliexpress-media.com/kf/Sd4281a26a8dd4a63be49e62d02f5c114g.jpg"],
+["https://sovrn.co/edbdgv5","ae-pic-a1.aliexpress-media.com/kf/S519a9c1690f44017860bc37e048cd03eT.jpg"],
+["https://sovrn.co/yij53dw","ae-pic-a1.aliexpress-media.com/kf/Sa618b24a38004d7c87eaa631c76f7cc0j.jpg"],
+["https://sovrn.co/ufncj4a","ae-pic-a1.aliexpress-media.com/kf/S497fd582e0a04216b4471e1d31e58a34O.jpg"],
+["https://sovrn.co/1l4mimw","ae-pic-a1.aliexpress-media.com/kf/S887f6ef7fb3d41bebb9100c79ed842e0E.jpg"],
+["https://sovrn.co/jbdsrpq","ae-pic-a1.aliexpress-media.com/kf/Sa8671e9d48c740af88e63fb4bee79424L.jpg"],
+["https://sovrn.co/7z6ofuj","ae-pic-a1.aliexpress-media.com/kf/S8c06405089cf4cc98b360a6c54af8322Y.jpg"],
+["https://sovrn.co/vpe9u4x","ae-pic-a1.aliexpress-media.com/kf/Sa10a3112cc764aa5a238f9d33cffdc9a9.jpg"],
+["https://sovrn.co/82dmgch","ae-pic-a1.aliexpress-media.com/kf/S2332e2340e4441d6962eaa035f722978u.jpg"],
+["https://sovrn.co/pskk7j0","ae-pic-a1.aliexpress-media.com/kf/S88f314704444401aabe5e5181d594d10E.jpg"],
+["https://sovrn.co/1nrbg05","ae-pic-a1.aliexpress-media.com/kf/Sdd4807bfc32345f7a7a279f05429d18cW.jpg"],
+["https://sovrn.co/fn4nvo1","ae-pic-a1.aliexpress-media.com/kf/Seb8e1de5aaca4fc3bccc2a61dbd9c7afZ.jpg"],
+["https://sovrn.co/met7xtu","ae-pic-a1.aliexpress-media.com/kf/S73bd1b9002a04941807e029c8746093b8.jpg"],
+["https://sovrn.co/23dxhkm","ae-pic-a1.aliexpress-media.com/kf/Sa594b63a3a474a099dc6bb51135a6d419.jpg"],
+["https://sovrn.co/12xbi88","ae-pic-a1.aliexpress-media.com/kf/S9d874b813e6d47119eb8114a34e52d9aQ.jpg"],
+["https://sovrn.co/a955uni","ae-pic-a1.aliexpress-media.com/kf/S375ac6842e514b0fa7cdd74b90ce9a86j.jpg"],
+["https://sovrn.co/0tkcnrp","ae-pic-a1.aliexpress-media.com/kf/S882513a843ae497f8a0f93fb464558d0b.jpg"],
+["https://sovrn.co/1d6uncj","ae-pic-a1.aliexpress-media.com/kf/S3a81262d93a44302bda5ec7fd9ca2fa3C.jpg"],
+["https://sovrn.co/1gukx0v","ae-pic-a1.aliexpress-media.com/kf/S0dca4f85065b4641b45702880d1a32723.jpg"],
+["https://sovrn.co/13ayfpc","ae-pic-a1.aliexpress-media.com/kf/S2810954781a64c54a094928a5b673cbcc.jpg"],
+["https://sovrn.co/9js2vlj","ae-pic-a1.aliexpress-media.com/kf/S33c96386c9174e868bc3334f66386b55P.jpg"]
 ];
 
 let container = document.querySelector(".container");
@@ -173,14 +149,15 @@ for(let i = 0; i < products.length; i += 2){
     row.className = "row";
 
     for(let j = i; j < i+2 && j < products.length; j++){
-        let item = `
+        let img = "https://images.weserv.nl/?url=" + products[j][1];
+
+        row.innerHTML += `
         <div class="product">
-            <img src="${products[j][1]}">
+            <img src="${img}">
             <h3>Premium Sneaker</h3>
             <p>⭐ 4.6+ Rating | Trending Now</p>
             <a class="shop-btn" href="${products[j][0]}">SHOP NOW</a>
         </div>`;
-        row.innerHTML += item;
     }
 
     container.appendChild(row);
