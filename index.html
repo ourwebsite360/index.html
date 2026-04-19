@@ -4,24 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Peemens Guesthouse</title>
+<title>Stepmens Guest House</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
 
-/* GLOBAL */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins;
   background: #0a0a0a;
   color: white;
+  overflow-x: hidden;
 }
 
-/* LOADER */
-#loader {
+/* INTRO SCREEN */
+#intro {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -30,24 +32,31 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  animation: fadeOut 2.5s ease forwards;
 }
 
-.logo {
-  font-family: 'Playfair Display';
-  font-size: 40px;
+#intro h1 {
+  font-family: Playfair Display;
   color: gold;
-  animation: intro 2.5s ease forwards;
+  font-size: 40px;
+  transform: perspective(600px) rotateX(40deg);
+  animation: introAnim 2s ease forwards;
 }
 
-@keyframes intro {
-  0% { transform: rotateX(90deg); opacity: 0; }
-  100% { transform: rotateX(0); opacity: 1; }
+@keyframes introAnim {
+  0% { transform: scale(0.6) rotateX(90deg); opacity: 0; }
+  100% { transform: scale(1) rotateX(0); opacity: 1; }
 }
 
-/* HERO */
+@keyframes fadeOut {
+  0%,70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* HERO (4D LAYER) */
 .hero {
-  position: relative;
   height: 100vh;
+  position: relative;
   overflow: hidden;
 }
 
@@ -55,66 +64,65 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.1);
 }
 
 /* 3D CANVAS */
-#threeCanvas {
+canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 }
 
-/* OVERLAY */
-.overlay {
+/* OVERLAY DEPTH */
+.layer {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
+  mix-blend-mode: multiply;
 }
 
-/* HERO CONTENT */
+/* CONTENT */
 .content {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,-50%);
   text-align: center;
 }
 
 .content h1 {
-  font-family: 'Playfair Display';
   font-size: 50px;
+  font-family: Playfair Display;
 }
 
+/* BUTTON */
 .btn {
-  margin-top: 20px;
   padding: 15px 30px;
   background: gold;
   color: black;
-  text-decoration: none;
   border-radius: 30px;
+  text-decoration: none;
   display: inline-block;
+  margin-top: 20px;
 }
 
-/* FADE */
-.fade-in {
+/* SECTIONS (DEPTH SCROLL = “4D FEEL”) */
+.section {
+  padding: 100px 20px;
+  transform: translateZ(0);
+  transition: 0.8s;
+}
+
+.section[data-scroll] {
   opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
+  transform: translateY(80px);
 }
 
-.fade-in.show {
+.section.show {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* SECTIONS */
-.section {
-  padding: 80px 20px;
-  text-align: center;
 }
 
 /* ROOMS */
@@ -128,6 +136,11 @@ body {
   background: #111;
   border-radius: 10px;
   overflow: hidden;
+  transition: transform 0.4s;
+}
+
+.card:hover {
+  transform: scale(1.05) rotateX(5deg);
 }
 
 .card img {
@@ -176,9 +189,9 @@ footer {
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <h1 class="logo">Peemens Guesthouse</h1>
+<!-- INTRO -->
+<div id="intro">
+  <h1>Stepmens Guest House</h1>
 </div>
 
 <!-- HERO -->
@@ -188,170 +201,93 @@ footer {
     <source src="https://cdn.coverr.co/videos/coverr-luxury-hotel-2603/1080p.mp4">
   </video>
 
-  <!-- 3D CANVAS -->
-  <canvas id="threeCanvas"></canvas>
+  <div class="layer"></div>
 
-  <div class="overlay"></div>
+  <canvas id="c"></canvas>
 
   <div class="content">
-    <h1>Peemens Guesthouse</h1>
-    <p>Luxury Experience</p>
-    <a href="#booking" class="btn">Book Now</a>
+    <h1>Luxury Stay Experience</h1>
+    <a href="#book" class="btn">Book Now</a>
   </div>
 
 </div>
 
 <!-- ROOMS -->
-<section class="section fade-in">
-<h2>Our Rooms</h2>
+<section class="section" data-scroll>
+  <h2>Rooms</h2>
 
-<div class="rooms">
-<div class="card"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"><h3>Standard</h3></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461"><h3>Deluxe</h3></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"><h3>Executive</h3></div>
-</div>
+  <div class="rooms">
+    <div class="card"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461"></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"></div>
+  </div>
 </section>
 
-<!-- PARALLAX -->
 <div class="parallax"></div>
 
 <!-- BOOKING -->
-<section id="booking" class="section fade-in">
+<section id="book" class="section" data-scroll>
+  <h2>Book Now</h2>
 
-<h2>Book Your Stay</h2>
-
-<div class="form-box">
-
-<input id="name" placeholder="Full Name">
-
-<select id="room">
-<option value="100">Standard - GHS 100</option>
-<option value="180">Deluxe - GHS 180</option>
-<option value="250">Executive - GHS 250</option>
-</select>
-
-<input type="date" id="checkin">
-<input type="date" id="checkout">
-
-<button onclick="bookNow()">Confirm Booking</button>
-
-</div>
-
+  <div class="form-box">
+    <input placeholder="Name">
+    <input type="date">
+    <input type="date">
+    <button>Confirm Booking</button>
+  </div>
 </section>
 
-<footer>
-© 2026 Peemens Guesthouse
-</footer>
+<footer>© Stepmens Guest House</footer>
 
 <!-- THREE JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <script>
 
-/* LOADER */
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-  }, 2500);
-};
-
-/* SCROLL */
-const elements = document.querySelectorAll(".fade-in");
+/* 4D SCROLL EFFECT */
+const sections = document.querySelectorAll("[data-scroll]");
 
 window.addEventListener("scroll", () => {
-  elements.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-      el.classList.add("show");
+  sections.forEach(sec => {
+    if(sec.getBoundingClientRect().top < window.innerHeight - 100){
+      sec.classList.add("show");
     }
   });
 });
 
-/* BOOKING */
-function bookNow() {
-
-  let name = document.getElementById("name").value;
-  let room = document.getElementById("room");
-  let roomText = room.options[room.selectedIndex].text;
-  let price = room.value;
-
-  let checkin = document.getElementById("checkin").value;
-  let checkout = document.getElementById("checkout").value;
-
-  let days = (new Date(checkout) - new Date(checkin)) / (1000*60*60*24);
-
-  if(days <= 0) return alert("Invalid dates");
-
-  let total = days * price;
-
-  let msg = `Booking:
-Name: ${name}
-Room: ${roomText}
-Check-in: ${checkin}
-Check-out: ${checkout}
-Total: GHS ${total}`;
-
-  window.open(`https://wa.me/233264594779?text=${encodeURIComponent(msg)}`);
-}
-
-/* 3D SCENE */
+/* 3D FLOAT OBJECT */
 const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("c"), alpha:true });
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+renderer.setSize(innerWidth, innerHeight);
 
-const renderer = new THREE.WebGLRenderer({
-  canvas: document.getElementById("threeCanvas"),
-  alpha: true
-});
+const geo = new THREE.IcosahedronGeometry(2,1);
+const mat = new THREE.MeshStandardMaterial({ color:0xFFD700, metalness:1, roughness:0.3 });
+const mesh = new THREE.Mesh(geo, mat);
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-const geometry = new THREE.IcosahedronGeometry(2, 1);
-
-const material = new THREE.MeshStandardMaterial({
-  color: 0xFFD700,
-  metalness: 1,
-  roughness: 0.2
-});
-
-const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-const light = new THREE.PointLight(0xffffff, 1);
+const light = new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 scene.add(light);
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambient);
-
 camera.position.z = 5;
 
-let mouseX = 0;
-let mouseY = 0;
-
-document.addEventListener("mousemove", (e) => {
-  mouseX = (e.clientX/window.innerWidth)*2-1;
-  mouseY = -(e.clientY/window.innerHeight)*2+1;
+/* MOUSE 4D FEEL */
+document.addEventListener("mousemove", (e)=>{
+  mesh.position.x = (e.clientX/window.innerWidth-0.5)*2;
+  mesh.position.y = -(e.clientY/window.innerHeight-0.5)*2;
 });
 
-function animate() {
+function animate(){
   requestAnimationFrame(animate);
-
-  mesh.rotation.x += 0.005;
+  mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.01;
-
-  mesh.position.x = mouseX * 1.5;
-  mesh.position.y = mouseY * 1.5;
-
-  renderer.render(scene, camera);
+  renderer.render(scene,camera);
 }
 
 animate();
-
-window.addEventListener("resize", () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-});
 
 </script>
 
