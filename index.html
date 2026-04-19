@@ -44,10 +44,11 @@ body {
   100% { transform: rotateX(0); opacity: 1; }
 }
 
-/* HERO VIDEO */
+/* HERO */
 .hero {
   position: relative;
   height: 100vh;
+  overflow: hidden;
 }
 
 .hero video {
@@ -56,6 +57,17 @@ body {
   object-fit: cover;
 }
 
+/* 3D CANVAS */
+#threeCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* OVERLAY */
 .overlay {
   position: absolute;
   width: 100%;
@@ -63,6 +75,7 @@ body {
   background: rgba(0,0,0,0.6);
 }
 
+/* HERO CONTENT */
 .content {
   position: absolute;
   top: 50%;
@@ -170,9 +183,14 @@ footer {
 
 <!-- HERO -->
 <div class="hero">
+
   <video autoplay muted loop>
     <source src="https://cdn.coverr.co/videos/coverr-luxury-hotel-2603/1080p.mp4">
   </video>
+
+  <!-- 3D CANVAS -->
+  <canvas id="threeCanvas"></canvas>
+
   <div class="overlay"></div>
 
   <div class="content">
@@ -180,6 +198,7 @@ footer {
     <p>Luxury Experience</p>
     <a href="#booking" class="btn">Book Now</a>
   </div>
+
 </div>
 
 <!-- ROOMS -->
@@ -191,7 +210,6 @@ footer {
 <div class="card"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461"><h3>Deluxe</h3></div>
 <div class="card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"><h3>Executive</h3></div>
 </div>
-
 </section>
 
 <!-- PARALLAX -->
@@ -225,6 +243,9 @@ footer {
 © 2026 Peemens Guesthouse
 </footer>
 
+<!-- THREE JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
 <script>
 
 /* LOADER */
@@ -234,7 +255,7 @@ window.onload = () => {
   }, 2500);
 };
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 const elements = document.querySelectorAll(".fade-in");
 
 window.addEventListener("scroll", () => {
@@ -271,6 +292,66 @@ Total: GHS ${total}`;
 
   window.open(`https://wa.me/233264594779?text=${encodeURIComponent(msg)}`);
 }
+
+/* 3D SCENE */
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById("threeCanvas"),
+  alpha: true
+});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const geometry = new THREE.IcosahedronGeometry(2, 1);
+
+const material = new THREE.MeshStandardMaterial({
+  color: 0xFFD700,
+  metalness: 1,
+  roughness: 0.2
+});
+
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+const light = new THREE.PointLight(0xffffff, 1);
+light.position.set(5,5,5);
+scene.add(light);
+
+const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambient);
+
+camera.position.z = 5;
+
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = (e.clientX/window.innerWidth)*2-1;
+  mouseY = -(e.clientY/window.innerHeight)*2+1;
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  mesh.rotation.x += 0.005;
+  mesh.rotation.y += 0.01;
+
+  mesh.position.x = mouseX * 1.5;
+  mesh.position.y = mouseY * 1.5;
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener("resize", () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+});
 
 </script>
 
