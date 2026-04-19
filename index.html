@@ -1,197 +1,278 @@
-"use client";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import { useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
-import { Suspense, useRef } from "react";
-import { motion } from "framer-motion";
+<title>Peemens Guesthouse</title>
 
-/* ================= 3D MANSION ================= */
-function MansionModel() {
-  const { scene } = useGLTF("/models/mansion.glb");
-  const ref = useRef();
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
 
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    if (ref.current) {
-      ref.current.position.y = Math.sin(t * 0.5) * 0.15;
-      ref.current.rotation.y += 0.002;
+<style>
+
+/* GLOBAL */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0a0a0a;
+  color: white;
+}
+
+/* LOADER */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.logo {
+  font-family: 'Playfair Display';
+  font-size: 40px;
+  color: gold;
+  animation: intro 2.5s ease forwards;
+}
+
+@keyframes intro {
+  0% { transform: rotateX(90deg); opacity: 0; }
+  100% { transform: rotateX(0); opacity: 1; }
+}
+
+/* HERO VIDEO */
+.hero {
+  position: relative;
+  height: 100vh;
+}
+
+.hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.content h1 {
+  font-family: 'Playfair Display';
+  font-size: 50px;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: gold;
+  color: black;
+  text-decoration: none;
+  border-radius: 30px;
+  display: inline-block;
+}
+
+/* FADE */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SECTIONS */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* ROOMS */
+.rooms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* PARALLAX */
+.parallax {
+  height: 60vh;
+  background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945') center/cover fixed;
+}
+
+/* BOOKING */
+.form-box {
+  max-width: 500px;
+  margin: auto;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: gold;
+  border: none;
+  font-weight: bold;
+}
+
+footer {
+  background: black;
+  padding: 20px;
+  text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <h1 class="logo">Peemens Guesthouse</h1>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-luxury-hotel-2603/1080p.mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>Peemens Guesthouse</h1>
+    <p>Luxury Experience</p>
+    <a href="#booking" class="btn">Book Now</a>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<section class="section fade-in">
+<h2>Our Rooms</h2>
+
+<div class="rooms">
+<div class="card"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"><h3>Standard</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461"><h3>Deluxe</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"><h3>Executive</h3></div>
+</div>
+
+</section>
+
+<!-- PARALLAX -->
+<div class="parallax"></div>
+
+<!-- BOOKING -->
+<section id="booking" class="section fade-in">
+
+<h2>Book Your Stay</h2>
+
+<div class="form-box">
+
+<input id="name" placeholder="Full Name">
+
+<select id="room">
+<option value="100">Standard - GHS 100</option>
+<option value="180">Deluxe - GHS 180</option>
+<option value="250">Executive - GHS 250</option>
+</select>
+
+<input type="date" id="checkin">
+<input type="date" id="checkout">
+
+<button onclick="bookNow()">Confirm Booking</button>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Peemens Guesthouse
+</footer>
+
+<script>
+
+/* LOADER */
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+  }, 2500);
+};
+
+/* SCROLL ANIMATION */
+const elements = document.querySelectorAll(".fade-in");
+
+window.addEventListener("scroll", () => {
+  elements.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+      el.classList.add("show");
     }
   });
+});
 
-  return <primitive ref={ref} object={scene} scale={1.5} />;
+/* BOOKING */
+function bookNow() {
+
+  let name = document.getElementById("name").value;
+  let room = document.getElementById("room");
+  let roomText = room.options[room.selectedIndex].text;
+  let price = room.value;
+
+  let checkin = document.getElementById("checkin").value;
+  let checkout = document.getElementById("checkout").value;
+
+  let days = (new Date(checkout) - new Date(checkin)) / (1000*60*60*24);
+
+  if(days <= 0) return alert("Invalid dates");
+
+  let total = days * price;
+
+  let msg = `Booking:
+Name: ${name}
+Room: ${roomText}
+Check-in: ${checkin}
+Check-out: ${checkout}
+Total: GHS ${total}`;
+
+  window.open(`https://wa.me/233264594779?text=${encodeURIComponent(msg)}`);
 }
 
-function Mansion3D() {
-  return (
-    <Canvas camera={{ position: [5, 3, 6], fov: 45 }}>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 10, 5]} intensity={1.5} />
-      <Environment preset="sunset" />
+</script>
 
-      <Suspense fallback={null}>
-        <MansionModel />
-      </Suspense>
-
-      <OrbitControls enableZoom={false} />
-    </Canvas>
-  );
-}
-
-useGLTF.preload("/models/mansion.glb");
-
-/* ================= MAIN PAGE ================= */
-export default function Home() {
-
-  const phone = "+233207007502";
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    date: "",
-  });
-
-  const [search, setSearch] = useState("");
-
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const whatsappLink =
-    `https://wa.me/233207007502?text=Hello%20I%20am%20interested%20in%20the%20Kokrobitey%20Villa`;
-
-  const handleBooking = () => {
-    alert("Booking sent!");
-    window.open(whatsappLink);
-  };
-
-  return (
-    <div className="bg-black text-white">
-
-      {/* ================= HERO ================= */}
-      <section className="h-screen relative">
-
-        <div className="absolute inset-0">
-          <Mansion3D />
-        </div>
-
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold"
-          >
-            Luxury Mansion
-          </motion.h1>
-
-          <p className="text-gray-300 mt-4">
-            Kokrobitey Ocean View Residence
-          </p>
-
-          {/* CTA */}
-          <div className="flex gap-4 mt-6 flex-wrap">
-
-            <a
-              href={`tel:${phone}`}
-              className="bg-white text-black px-6 py-3 rounded-xl font-bold"
-            >
-              Call Now
-            </a>
-
-            <a
-              href={whatsappLink}
-              className="bg-green-500 text-black px-6 py-3 rounded-xl font-bold"
-            >
-              WhatsApp
-            </a>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================= SEARCH ================= */}
-      <section className="flex justify-center -mt-10 relative z-20">
-
-        <div className="flex w-full max-w-2xl bg-white/10 backdrop-blur-xl rounded-2xl overflow-hidden">
-
-          <input
-            className="w-full p-4 bg-transparent outline-none"
-            placeholder="Search villas, pool, ocean view..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-
-          <button
-            onClick={() => alert(search)}
-            className="bg-yellow-500 text-black px-6 font-bold"
-          >
-            Search
-          </button>
-
-        </div>
-
-      </section>
-
-      {/* ================= FEATURES ================= */}
-      <section className="grid md:grid-cols-3 gap-6 p-10">
-
-        {[
-          "Private Pool",
-          "Ocean View",
-          "Luxury Interior",
-          "Security",
-          "Generator",
-          "Air Conditioning",
-        ].map((f, i) => (
-          <div key={i} className="bg-white/5 p-6 rounded-xl">
-            {f}
-          </div>
-        ))}
-
-      </section>
-
-      {/* ================= BOOKING ================= */}
-      <section className="p-10 text-center">
-
-        <h2 className="text-3xl mb-6">Book Viewing</h2>
-
-        <div className="max-w-md mx-auto space-y-4">
-
-          <input
-            name="name"
-            placeholder="Name"
-            className="w-full p-3 bg-white/10 rounded"
-            onChange={handleChange}
-          />
-
-          <input
-            name="email"
-            placeholder="Email"
-            className="w-full p-3 bg-white/10 rounded"
-            onChange={handleChange}
-          />
-
-          <input
-            type="date"
-            name="date"
-            className="w-full p-3 bg-white/10 rounded"
-            onChange={handleChange}
-          />
-
-          <button
-            onClick={handleBooking}
-            className="bg-yellow-500 text-black w-full p-3 font-bold rounded-xl"
-          >
-            Confirm Booking
-          </button>
-
-        </div>
-
-      </section>
-
-    </div>
-  );
-}
+</body>
+</html>
