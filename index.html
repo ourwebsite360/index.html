@@ -4,289 +4,336 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Stepmens Guest House</title>
+<title>Treehouse Restaurant</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-
-html {
-  scroll-behavior: smooth;
+body{
+    margin:0;
+    font-family:Poppins;
+    background:#0d0d0d;
+    color:white;
 }
 
-body {
-  margin: 0;
-  font-family: Poppins;
-  background: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
+/* NAV */
+nav{
+    position:fixed;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    padding:20px 40px;
+    background:rgba(0,0,0,0.7);
+    z-index:1000;
+}
+nav h1{color:#d4af37;}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
 }
 
-/* INTRO SCREEN */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: fadeOut 2.5s ease forwards;
+.hero-content{
+    position:relative;
+    z-index:2;
 }
 
-#intro h1 {
-  font-family: Playfair Display;
-  color: gold;
-  font-size: 40px;
-  transform: perspective(600px) rotateX(40deg);
-  animation: introAnim 2s ease forwards;
+.hero h2{font-size:50px;}
+.hero button{
+    padding:12px 20px;
+    margin-top:20px;
+    background:#d4af37;
+    border:none;
+    cursor:pointer;
 }
 
-@keyframes introAnim {
-  0% { transform: scale(0.6) rotateX(90deg); opacity: 0; }
-  100% { transform: scale(1) rotateX(0); opacity: 1; }
-}
-
-@keyframes fadeOut {
-  0%,70% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
-}
-
-/* HERO (4D LAYER) */
-.hero {
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.1);
-}
-
-/* 3D CANVAS */
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* OVERLAY DEPTH */
-.layer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
-  mix-blend-mode: multiply;
-}
-
-/* CONTENT */
-.content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-}
-
-.content h1 {
-  font-size: 50px;
-  font-family: Playfair Display;
-}
-
-/* BUTTON */
-.btn {
-  padding: 15px 30px;
-  background: gold;
-  color: black;
-  border-radius: 30px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 20px;
-}
-
-/* SECTIONS (DEPTH SCROLL = “4D FEEL”) */
-.section {
-  padding: 100px 20px;
-  transform: translateZ(0);
-  transition: 0.8s;
-}
-
-.section[data-scroll] {
-  opacity: 0;
-  transform: translateY(80px);
-}
-
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ROOMS */
-.rooms {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #111;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.4s;
-}
-
-.card:hover {
-  transform: scale(1.05) rotateX(5deg);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* PARALLAX */
-.parallax {
-  height: 60vh;
-  background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945') center/cover fixed;
+/* 3D SCENE */
+#scene{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    top:0;
+    left:0;
+    z-index:0;
 }
 
 /* BOOKING */
-.form-box {
-  max-width: 500px;
-  margin: auto;
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
+section{
+    padding:80px 40px;
 }
 
-input, select {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
+.form-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  background: gold;
-  border: none;
-  font-weight: bold;
+form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
 }
 
-footer {
-  background: black;
-  padding: 20px;
-  text-align: center;
+input,select,textarea{
+    padding:12px;
+    border:none;
+    border-radius:5px;
 }
 
+.btn{
+    background:#d4af37;
+    padding:12px;
+    border:none;
+    cursor:pointer;
+}
+
+/* CONTACT */
+.contact-btns{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.call{background:#28a745;}
+.wa{background:#25D366;}
+
+/* MAP */
+iframe{
+    width:100%;
+    height:250px;
+    border-radius:10px;
+}
+
+/* ADMIN */
+.admin{
+    background:#111;
+    padding:20px;
+    margin-top:40px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th,td{
+    border:1px solid #333;
+    padding:10px;
+}
+
+th{background:#222;}
+
+.delete{
+    background:red;
+    color:white;
+    border:none;
+    padding:5px;
+    cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>Stepmens Guest House</h1>
-</div>
+<nav>
+<h1>Treehouse</h1>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
 
-  <video autoplay muted loop>
-    <source src="https://cdn.coverr.co/videos/coverr-luxury-hotel-2603/1080p.mp4">
-  </video>
+<div id="scene"></div>
 
-  <div class="layer"></div>
-
-  <canvas id="c"></canvas>
-
-  <div class="content">
-    <h1>Luxury Stay Experience</h1>
-    <a href="#book" class="btn">Book Now</a>
-  </div>
+<div class="hero-content">
+<h2>Luxury Dining in Accra</h2>
+<p>Book your table instantly</p>
+<button onclick="document.getElementById('book').scrollIntoView()">Reserve</button>
+</div>
 
 </div>
 
-<!-- ROOMS -->
-<section class="section" data-scroll>
-  <h2>Rooms</h2>
-
-  <div class="rooms">
-    <div class="card"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461"></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"></div>
-  </div>
-</section>
-
-<div class="parallax"></div>
-
 <!-- BOOKING -->
-<section id="book" class="section" data-scroll>
-  <h2>Book Now</h2>
+<section id="book">
 
-  <div class="form-box">
-    <input placeholder="Name">
-    <input type="date">
-    <input type="date">
-    <button>Confirm Booking</button>
-  </div>
+<h2>Book a Table</h2>
+
+<div class="form-box">
+
+<form id="bookingForm">
+
+<input type="text" id="name" placeholder="Name" required>
+<input type="email" id="email" placeholder="Email" required>
+
+<select id="guests">
+<option>1 Guest</option>
+<option>2 Guests</option>
+<option>3 Guests</option>
+<option>4 Guests</option>
+<option>5+ Guests</option>
+</select>
+
+<select id="time">
+<option>12:00 PM</option>
+<option>2:00 PM</option>
+<option>4:00 PM</option>
+<option>6:00 PM</option>
+<option>8:00 PM</option>
+</select>
+
+<textarea id="message" placeholder="Message"></textarea>
+
+<button class="btn" type="submit">Confirm Booking</button>
+
+</form>
+
+<!-- CONTACT -->
+<div>
+
+<h3>Contact</h3>
+<p>📍 Nyaniba, Accra</p>
+<p>📞 +233 59 940 0737</p>
+
+<div class="contact-btns">
+<a class="btn call" href="tel:+233599400737">Call</a>
+<a class="btn wa" id="waBtn">WhatsApp</a>
+</div>
+
+<iframe src="https://www.google.com/maps?q=5.5608835,-0.1721958&output=embed"></iframe>
+
+</div>
+
+</div>
+
+<!-- ADMIN -->
+<div class="admin">
+<h3>Admin Dashboard</h3>
+<input type="password" id="pin" placeholder="Enter PIN">
+<button onclick="login()">Login</button>
+
+<table id="table" style="display:none;">
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Guests</th>
+<th>Time</th>
+<th>Delete</th>
+</tr>
+</table>
+
+</div>
+
 </section>
-
-<footer>© Stepmens Guest House</footer>
-
-<!-- THREE JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <script>
 
-/* 4D SCROLL EFFECT */
-const sections = document.querySelectorAll("[data-scroll]");
+/* WHATSAPP */
+document.getElementById("waBtn").onclick = function(){
+    let msg = `Hello, I want to book a table`;
+    window.open("https://wa.me/233599400737?text=" + msg);
+};
 
-window.addEventListener("scroll", () => {
-  sections.forEach(sec => {
-    if(sec.getBoundingClientRect().top < window.innerHeight - 100){
-      sec.classList.add("show");
-    }
-  });
+/* BOOKING */
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+let booking = {
+name: name.value,
+email: email.value,
+guests: guests.value,
+time: time.value,
+message: message.value
+};
+
+let data = JSON.parse(localStorage.getItem("bookings")) || [];
+data.push(booking);
+localStorage.setItem("bookings", JSON.stringify(data));
+
+alert("Booking Saved!");
 });
 
-/* 3D FLOAT OBJECT */
+/* ADMIN LOGIN */
+function login(){
+if(pin.value === "1234"){
+document.getElementById("table").style.display="table";
+load();
+}
+}
+
+/* LOAD BOOKINGS */
+function load(){
+let data = JSON.parse(localStorage.getItem("bookings")) || [];
+let table = document.getElementById("table");
+
+data.forEach((b,i)=>{
+table.innerHTML += `
+<tr>
+<td>${b.name}</td>
+<td>${b.email}</td>
+<td>${b.guests}</td>
+<td>${b.time}</td>
+<td><button class="delete" onclick="del(${i})">X</button></td>
+</tr>`;
+});
+}
+
+/* DELETE */
+function del(i){
+let data = JSON.parse(localStorage.getItem("bookings"));
+data.splice(i,1);
+localStorage.setItem("bookings", JSON.stringify(data));
+location.reload();
+}
+
+/* 3D MOBIUS */
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("c"), alpha:true });
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
 
-renderer.setSize(innerWidth, innerHeight);
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById("scene").appendChild(renderer.domElement);
 
-const geo = new THREE.IcosahedronGeometry(2,1);
-const mat = new THREE.MeshStandardMaterial({ color:0xFFD700, metalness:1, roughness:0.3 });
-const mesh = new THREE.Mesh(geo, mat);
+const geometry = new THREE.ParametricGeometry(function(u,t,target){
+u = u*Math.PI*2;
+t = (t-0.5)*2;
 
-scene.add(mesh);
+let a=2;
+let x=(a+t*Math.cos(u/2))*Math.cos(u);
+let y=(a+t*Math.cos(u/2))*Math.sin(u);
+let z=t*Math.sin(u/2);
+
+target.set(x,y,z);
+},100,16);
+
+const material = new THREE.MeshStandardMaterial({
+color:0xd4af37,
+wireframe:true
+});
+
+const mobius = new THREE.Mesh(geometry,material);
+scene.add(mobius);
+
+camera.position.z=6;
 
 const light = new THREE.PointLight(0xffffff,1);
 light.position.set(5,5,5);
 scene.add(light);
 
-camera.position.z = 5;
-
-/* MOUSE 4D FEEL */
-document.addEventListener("mousemove", (e)=>{
-  mesh.position.x = (e.clientX/window.innerWidth-0.5)*2;
-  mesh.position.y = -(e.clientY/window.innerHeight-0.5)*2;
-});
-
 function animate(){
-  requestAnimationFrame(animate);
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.01;
-  renderer.render(scene,camera);
+requestAnimationFrame(animate);
+mobius.rotation.x+=0.005;
+mobius.rotation.y+=0.01;
+renderer.render(scene,camera);
 }
-
 animate();
 
 </script>
