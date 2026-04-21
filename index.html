@@ -1,227 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Treehouse Restaurant</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>B2B Ghana Restaurant</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#fff;
-    color:#222;
+:root{
+  --bg:#0e0a07;
+  --amber:#c77b30;
+  --gold:#e3a857;
+  --text:#f5efe6;
+  --muted:#b9a99a;
 }
 
-/* HEADER */
-header {
-    background:linear-gradient(90deg, #b30000, #ff1a1a);
-    padding:20px;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
 }
 
-nav a {
-    color:white;
-    margin:0 10px;
-    text-decoration:none;
-    font-weight:bold;
+/* CURSOR */
+.cursor{
+  width:20px;height:20px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition:0.1s;
+  z-index:9999;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:0.4s;
+  z-index:1000;
+}
+nav.scrolled{
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+}
+nav h1{
+  color:var(--gold);
+  letter-spacing:2px;
+}
+nav ul{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:500;
 }
 
 /* HERO */
-.hero {
-    height:420px;
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+.hero h2{
+  font-size:60px;
+  font-weight:800;
+}
+.hero p{
+  margin-top:10px;
+  color:var(--muted);
 }
 
-.hero-text {
-    max-width:400px;
+.stats{
+  margin-top:25px;
+  display:flex;
+  gap:30px;
 }
 
-.hero h2 {
-    color:#b30000;
-}
-
-/* 3D */
-#scene-container {
-    width:400px;
-    height:400px;
-}
-
-/* SECTIONS */
-section {
-    padding:40px;
+/* SECTION */
+section{
+  padding:100px 60px;
 }
 
 /* MENU */
-.menu {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card{
+  background:#1a120d;
+  padding:20px;
+  border-radius:15px;
+  border:1px solid #2a1c14;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--gold);
 }
 
-.card {
-    border:1px solid #ddd;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+/* BUTTON */
+.btn{
+  padding:12px 25px;
+  background:var(--amber);
+  border:none;
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
+  border-radius:8px;
 }
 
-/* CONTACT */
-input, textarea {
-    width:100%;
-    padding:10px;
-    margin:10px 0;
+/* FILTER */
+.filters{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.filters button{
+  background:#1a120d;
+  color:white;
+  border:1px solid #2a1c14;
+  padding:10px 15px;
+  cursor:pointer;
 }
 
-button {
-    background:#b30000;
-    color:white;
-    padding:10px;
-    border:none;
-    cursor:pointer;
+/* RESERVATION */
+form{
+  display:grid;
+  gap:15px;
+  max-width:500px;
+}
+input, textarea{
+  padding:12px;
+  background:#1a120d;
+  border:1px solid #2a1c14;
+  color:white;
 }
 
-/* ADMIN */
-.admin {
-    background:#f5f5f5;
-    padding:20px;
-    border-radius:10px;
+/* FOOTER */
+footer{
+  background:#0a0705;
+  padding:60px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+  color:var(--muted);
 }
 
-/* WHATSAPP BUTTON */
-.whatsapp {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#25D366;
-    color:white;
-    padding:15px 18px;
-    border-radius:50px;
-    font-weight:bold;
-    text-decoration:none;
-    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+/* ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s;
+}
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav ul{display:none;}
+  .hero h2{font-size:40px;}
+  footer{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>Treehouse Restaurant</h1>
-<nav>
-<a href="#menu">Menu</a>
-<a href="#contact">Contact</a>
-<a href="#admin">Admin</a>
+<div class="cursor"></div>
+
+<nav id="nav">
+  <h1>B2B Ghana</h1>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
-</header>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero fade">
+  <h2>Luxury Ghanaian Dining</h2>
+  <p>Authentic taste. Modern elegance. World-class experience.</p>
 
-<div class="hero-text">
-<h2>Premium Dining Experience</h2>
-<p>Order instantly or dine-in at Treehouse Restaurant, Accra.</p>
-<p><strong>Call / WhatsApp: 0599 400 737</strong></p>
-</div>
-
-<div id="scene-container"></div>
-
+  <div class="stats">
+    <div>⭐ 4.9 Rating</div>
+    <div>🍽 40+ Dishes</div>
+    <div>⏰ Open Daily</div>
+  </div>
 </div>
 
 <!-- MENU -->
-<section id="menu">
-<h2>Menu</h2>
-<div class="menu">
-<div class="card">🍗 Chicken Teriyaki - GH₵120</div>
-<div class="card">🐟 Fish Curry - GH₵140</div>
-<div class="card">🍝 Pasta - GH₵95</div>
-<div class="card">🥩 Steak - GH₵180</div>
-</div>
+<section id="menu" class="fade">
+  <h2>Our Menu</h2>
+
+  <div class="filters">
+    <button onclick="filterMenu('all')">All</button>
+    <button onclick="filterMenu('main')">Mains</button>
+    <button onclick="filterMenu('breakfast')">Breakfast</button>
+    <button onclick="filterMenu('drink')">Drinks</button>
+  </div>
+
+  <div class="menu-grid">
+
+    <div class="card main">
+      <h3>Jollof Rice & Chicken</h3>
+      <p>Smoky Ghanaian rice with grilled chicken</p>
+    </div>
+
+    <div class="card main">
+      <h3>Banku & Tilapia</h3>
+      <p>Charcoal grilled fish with spicy pepper sauce</p>
+    </div>
+
+    <div class="card breakfast">
+      <h3>Hausa Koko</h3>
+      <p>Traditional millet porridge</p>
+    </div>
+
+    <div class="card drink">
+      <h3>Asaana Drink</h3>
+      <p>Fermented corn sweet beverage</p>
+    </div>
+
+    <div class="card main">
+      <h3>Fufu & Light Soup</h3>
+      <p>Rich traditional Ghanaian soup</p>
+    </div>
+
+  </div>
 </section>
 
-<!-- REVIEWS -->
-<section>
-<h2>Reviews ⭐ 4.5</h2>
-<div class="card">★★★★★ “Amazing food and service!”</div>
-<div class="card">★★★★☆ “Great place, nice atmosphere.”</div>
+<!-- ABOUT -->
+<section id="about" class="fade">
+  <h2>About Us</h2>
+  <p>
+    B2B Ghana blends African heritage with modern luxury dining experiences.
+    We serve authentic dishes crafted with premium ingredients and artistic presentation.
+  </p>
+</section>
+
+<!-- RESERVATION -->
+<section id="reserve" class="fade">
+  <h2>Reservations</h2>
+
+  <form onsubmit="submitForm(event)">
+    <input type="text" placeholder="Full Name" required />
+    <input type="email" placeholder="Email" required />
+    <input type="date" required />
+    <textarea placeholder="Special Requests"></textarea>
+    <button class="btn" type="submit">Book Table</button>
+  </form>
+
+  <p id="msg"></p>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-<h2>Contact / Order</h2>
-
-<form onsubmit="send(event)">
-<input type="text" placeholder="Name" required>
-<input type="text" placeholder="Phone" required>
-<textarea placeholder="Order details"></textarea>
-<button type="submit">Send Order</button>
-</form>
-
-<p id="msg"></p>
+<section id="contact" class="fade">
+  <h2>Contact</h2>
+  <p>Accra, Ghana</p>
+  <p>📞 0599400737</p>
 </section>
 
-<!-- ADMIN -->
-<section id="admin" class="admin">
-<h2>Admin Dashboard</h2>
-<p>📩 Orders received: <span id="count">0</span></p>
-<button onclick="reset()">Reset</button>
-</section>
-
-<!-- WHATSAPP BUTTON -->
-<a class="whatsapp"
-href="https://wa.me/233599400737?text=Hello%20Treehouse%20Restaurant%2C%20I%20want%20to%20place%20an%20order"
-target="_blank">
-📲 Order on WhatsApp
-</a>
+<footer>
+  <div>
+    <h3>B2B Ghana</h3>
+    <p>Luxury African dining experience.</p>
+  </div>
+  <div>
+    <h4>Links</h4>
+    <p>Menu</p><p>Reservations</p>
+  </div>
+  <div>
+    <h4>Support</h4>
+    <p>Help</p><p>FAQ</p>
+  </div>
+  <div>
+    <h4>Social</h4>
+    <p>Instagram</p><p>Facebook</p>
+  </div>
+</footer>
 
 <script>
+// CURSOR
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e=>{
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
 
-let orders = 0;
+// NAV SCROLL
+window.addEventListener("scroll", ()=>{
+  document.getElementById("nav").classList.toggle("scrolled", window.scrollY>50);
+});
 
-function send(e){
-e.preventDefault();
-orders++;
-document.getElementById("count").innerText = orders;
+// FADE IN
+const faders = document.querySelectorAll(".fade");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+});
+faders.forEach(el=>observer.observe(el));
 
-document.getElementById("msg").innerText =
-"Order sent! We will contact you on 0599 400 737.";
+// FILTER MENU
+function filterMenu(type){
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card=>{
+    if(type==="all" || card.classList.contains(type)){
+      card.style.display="block";
+    } else {
+      card.style.display="none";
+    }
+  });
 }
 
-function reset(){
-orders = 0;
-document.getElementById("count").innerText = orders;
+// FORM
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById("msg").innerText = "Reservation successful ✔ We will contact you soon.";
 }
-
-/* 3D RESTAURANT */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 400/400, 0.1, 1000);
-
-const renderer = new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(400,400);
-document.getElementById("scene-container").appendChild(renderer.domElement);
-
-const geometry = new THREE.BoxGeometry(2,2,2);
-const material = new THREE.MeshBasicMaterial({color:0xb30000, wireframe:true});
-const cube = new THREE.Mesh(geometry, material);
-
-scene.add(cube);
-camera.position.z = 5;
-
-function animate(){
-requestAnimationFrame(animate);
-cube.rotation.x += 0.01;
-cube.rotation.y += 0.01;
-renderer.render(scene,camera);
-}
-animate();
-
 </script>
 
 </body>
